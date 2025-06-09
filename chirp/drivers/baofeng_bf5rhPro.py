@@ -33,7 +33,7 @@ struct{
     u8          pad_0x57;
     char        hard_ver[6];
     u8          pad_0x5e_f[2];
-    char          last_prog[16];
+    char        last_prog[16];
 } dev_info;
 
 # seekto 0x0080;
@@ -41,7 +41,7 @@ struct{
     lbcd        rx_freq[4];
     lbcd        tx_freq[4];
     bbcd        rx_tone[2];
-    bbcd       tx_tone[2];
+    bbcd        tx_tone[2];
     u8          unk_0x0d[4];
     u8          power:1,
                 unk_0x10:1,
@@ -69,218 +69,234 @@ struct{
 
 # seekto 0x7980;
 struct{
-	u8			band_a_wrkmode;
-	u8			band_b_wrkmode;
-	u8			unk_0x82_0x85[4];
-	u8			band_a_workzone;
-	u8			band_b_workzone;
-	u8			backlight_tm;
-	u8			tone_lvl;
-	u8			band_a_chandisp:4,
-				band_b_chandisp:4;
-	u8			dbl_waiting;
-	u8			main_band;
-	u8			squelch;
-	u8			vox_lvl;
-	u8			vox_dly_detect;
-	u8			power_save_off;
-	u8			power_save_time;
-	u8			lone_wrk_remind;
-	u8			lone_wrk_resp;
-	u8			apo;
-	u8			tot;
-	u8			tot_alert;
-	u8			unk_0x97;
-	u8			gps_zone;
-	u8			unk_0x99;
-	u8			hz1750;
-	u8			unk_0x9b_9d[3];
-	u8			noaa_chan;
-	u8			unk_0x_9f;
-	u8			vox:1,
+    u8          band_a_wrkmode;
+    u8          band_b_wrkmode;
+    u8          unk_0x82_0x85[4];
+    u8          band_a_workzone;
+    u8          band_b_workzone;
+    u8          backlight_tm;
+    u8          tone_lvl;
+    u8          band_a_chandisp:4,
+                band_b_chandisp:4;
+    u8          dbl_waiting;
+    u8          main_band;
+    u8          squelch;
+    u8          vox_lvl;
+    u8          vox_dly_detect;
+    u8          power_save_off;
+    u8          power_save_time;
+    u8          lone_wrk_remind;
+    u8          lone_wrk_resp;
+    u8          apo;
+    u8          tot;
+    u8          tot_alert;
+    u8          unk_0x97;
+    u8          gps_zone;
+    u8          unk_0x99;
+    u8          hz1750;
+    u8          unk_0x9b_9d[3];
+    u8          noaa_chan;
+    u8          unk_0x_9f;
+    u8          vox:1,
                 aprs:1,
                 alone_worker:1,
                 falling_alarm:1,
                 voice_announce:2,
-				unk_0xa0:1,
-				busy_lock:1;
-	u8			auto_keypad;
-	u8			tone;
-	u8			unk_0xa3;
-	u8			gps;
-	u8			power_on_char:1,
-				power_on_volt:1,
-				language:1,
-				wx:1,
-				eng_mode:1,
-				unk_0xa5:3;
-	u8			tail_mode:3,
-				noaa:1,
-				disp_reverse:1,
-				unk_0xa6:2,
-				enhance_func:1;
+                unk_0xa0:1,
+                busy_lock:1;
+    u8          auto_keypad;
+    u8          tone;
+    u8          unk_0xa3;
+    u8          gps;
+    u8          power_on_char:1,
+                power_on_volt:1,
+                language:1,
+                wx:1,
+                eng_mode:1,
+                unk_0xa5:3;
+    u8          tail_mode:3,
+                noaa:1,
+                disp_reverse:1,
+                unk_0xa6:2,
+                enhance_func:1;
 } settings;
 
 # seekto 0x79b0;
 struct{
-	u8		pf1_short; 
-	u8		pf2_short;
-	u8		pf1_long;
-	u8		pf2_long;
+    u8      pf1_short;
+    u8      pf2_short;
+    u8      pf1_long;
+    u8      pf2_long;
 }prog_key;
 
 # seekto 0x79c0;
 struct{
-	u8		power_on_pwd[8];
-	u8		program_pwd[8];
-	u8		power_on_char[8];
+    u8      power_on_pwd[8];
+    u8      program_pwd[8];
+    u8      power_on_char[8];
 } power_on;
+
+# seekto 0x7a20;
+struct{
+    lbit      bitfield[640];
+} chan_empty;
 
 # seekto 0x8102;
 struct{
-	lbcd		upper_freq[2];
-	u8		    sc_pad[2];
-	lbcd		lower_freq[2];
+    lbcd        upper_freq[2];
+    u8          sc_pad[2];
+    lbcd        lower_freq[2];
 } scan_freq;
 
 # seekto 0x8180;
 struct{
-	u8		scan_mode;
-	u8		flyback;
-	u8		rx_recovery;
-	u8		tx_recovery;
-	u8		channel_rtn;
-	u8		priority;
+    u8      scan_mode;
+    u8      flyback;
+    u8      rx_recovery;
+    u8      tx_recovery;
+    u8      channel_rtn;
+    u8      priority;
     u8      unk_0x8186[1];
     u8      prio_scan_chan;
-	u8		scan_range;
+    u8      scan_range;
 } scan_menu;
+
+# seekto 0x81a0;
+struct{
+    lbit      bitfield[640];
+} scan_skip;
 
 # seekto 0x8200;
 struct{
-	u8		dtmf_ani;
-	u8		sending_rate;
-	u8		first_tm_code;
-	u8		precarrier_tm;
-	u8		delay_tm;
-	u8		ptt_pause_tm;
-	u8		dtmf_st;
-	u8		auto_reset_tm;
-	u8		sepr_opts;
-	u8		group_num;
-	u8		decode_resp;
+    u8      dtmf_ani;
+    u8      sending_rate;
+    u8      first_tm_code;
+    u8      precarrier_tm;
+    u8      delay_tm;
+    u8      ptt_pause_tm;
+    u8      dtmf_st;
+    u8      auto_reset_tm;
+    u8      sepr_opts;
+    u8      group_num;
+    u8      decode_resp;
     u8      unk_0xb_f[5];
-	u8		self_id[3];
-	u8		unk_0x13_17[5];
-	u8		ptt_id[16];
-	u8		ptt_id_offline[16];
-	u8		stun[11];
+    u8      self_id[3];
+    u8      unk_0x13_17[5];
+    u8      ptt_id[16];
+    u8      ptt_id_offline[16];
+    u8      stun[11];
     u8      pad_0x43_47[5];
-	u8		kill[11];
+    u8      kill[11];
 }dtmf;
 
 # seekto 0x8260;
 struct{
-	u8		entry[16];
+    u8      entry[16];
 } dtmf_list[16];
 
 # seekto 0x9e00;
 struct{
-	char		selfid[6];
-    u8		    self_ssid;
+    char        selfid[6];
+    u8          self_ssid;
     u8          self_pad;
-	char		targetid[6];
-	u8		    target_ssid;
+    char        targetid[6];
+    u8          target_ssid;
     u8          target_pad;
-	u8		    precarrier_tm;
-	u8		    code_dly_tm;
+    u8          precarrier_tm;
+    u8          code_dly_tm;
 
 } aprs_menu;
 
 # seekto 0x9e18;
 struct{
-	char		entry[6];
-	u8		ssid;
-	u8		unused;
+    char        entry[6];
+    u8          ssid;
+    u8          unused;
 } ssid_tbl[8];
 
 # seekto 0xa010;
 struct{
-	u8		code;
-	u8		unused2;
-	char		name[14];
+    u8          code;
+    u8          unused2;
+    char        name[14];
 } contacts[80];
 """
 
 ADDRS = [0x000000, 0x100000, 0x200000, 0x300000,
-        0x400000, 0x500000, 0x600000, 0x700000,
-        0x800000, 0x900000, 0xa00000]
+         0x400000, 0x500000, 0x600000, 0x700000,
+         0x800000, 0x900000, 0xa00000]
 
 BLK_SZ = 0x1000
 
+
 def raw_send(serial, data, exlen):
     serial.write(data)
-    return(serial.read(exlen))
+    return (serial.read(exlen))
+
 
 def wakeup(serial):
-    cmd = struct.pack('>QLL',0,0,0xffffffff)
-    raw_send(serial,cmd,0)
+    cmd = struct.pack('>QLL', 0, 0, 0xffffffff)
+    raw_send(serial, cmd, 0)
     time.sleep(.5)
-    resp = raw_send(serial,cmd,1)
+    resp = raw_send(serial, cmd, 1)
     if len(resp) != 1 or resp != b'\x41':
         err = f"Radio Wakeup error expected 0x41 got {resp}"
         LOG.error(err)
         raise errors.RadioError(err)
 
+
 def exit_prog(serial, xor):
-    ba = [ b ^ xor for b in b'END\x00']
+    ba = [b ^ xor for b in b'END\x00']
     resp = raw_send(serial, bytes(ba), 1)
     if (resp[0] ^ xor) != 0x41:
         err = f"Exit Prog expect 0x41 got {resp.hex()}"
         LOG.error(err)
 
-def do_init(serial,xor):
+
+def do_init(serial, xor):
     cmd = b'PROGRAM' + bytes([xor])
-    resp = raw_send(serial,cmd,1)
+    resp = raw_send(serial, cmd, 1)
     if (resp[0] ^ xor) != 0x41:
         err = f"Init Error expected 0x41 got {resp}"
         LOG.error(err)
         raise errors.RadioError(err)
     xb = xor ^ 0xff
     cmd = bytes([xb] * 8)
-    resp = raw_send(serial,cmd,1)
+    resp = raw_send(serial, cmd, 1)
     if (resp[0] ^ xor) != 0x41:
         err = f"Init Error expected 0x41 got {resp}"
         LOG.error(err)
         raise errors.RadioError(err)
     xs = [(xor ^ ord(c)) for c in 'INFORMATION']
-    resp = raw_send(serial, bytes(xs),16)
+    resp = raw_send(serial, bytes(xs), 16)
     id = [chr(b ^ xor) for b in resp[:6]]
-    if "".join(id) !='BF-5RH':
+    if "".join(id) != 'BF-5RH':
         err = f"Radio Mismatch got {id}"
         LOG.error(err)
         raise errors.RadioError(err)
-    resp = raw_send(serial,bytes(0x52 ^ xor), 1)
+    resp = raw_send(serial, bytes(0x52 ^ xor), 1)
     if (resp[0] ^ xor) != 0x41:
         err = f"Init Error expected 0x41 got 0x{resp.hex()}"
         LOG.error(err)
         raise errors.RadioError(err)
 
-def read_block(serial, xor, addr,blk_len):
+
+def read_block(serial, xor, addr, blk_len):
     i_cmd = (0x52000000 + addr) ^ (0x01010101 * xor)
-    cmd = struct.pack('>L',i_cmd)
+    cmd = struct.pack('>L', i_cmd)
     resp = raw_send(serial, cmd, blk_len + 4)
     i_resp = struct.unpack('>L', resp[:4])[0]
     if i_resp != (0x57000000 + addr) ^ (0x1010101 * xor):
         err = "Read block echo failed"
         LOG.error(err)
         raise errors.RadioError(err)
-    return resp[4:] 
+    return resp[4:]
+
 
 def write_block(serial, xor, addr, data, blk_len):
     i_cmd = (0x57000000 + addr) ^ (0x01010101 * xor)
-    cmd = struct.pack('>L',i_cmd)
-    with open('testwrite.img','ab') as f:
+    cmd = struct.pack('>L', i_cmd)
+    with open('testwrite.img', 'ab') as f:
         f.write(data)
     resp = raw_send(serial, cmd + data, 1)
     if (resp[0] ^ xor) != 0x41:
@@ -288,7 +304,8 @@ def write_block(serial, xor, addr, data, blk_len):
         LOG.error(err)
         raise errors.RadioError(err)
     return blk_len
- 
+
+
 def do_download(radio):
     data = b''
     try:
@@ -303,16 +320,19 @@ def do_download(radio):
         status.max = len(ADDRS) * BLK_SZ
         status.msg = "Downloading..."
         for addr in ADDRS:
-            resp = read_block(serial, xor, addr, BLK_SZ)    
+            resp = read_block(serial, xor, addr, BLK_SZ)
             da = [b ^ xor for b in resp]
             data += bytes(da)
             status.cur += len(resp)
             radio.status_fn(status)
+    except errors.RadioError :
+        raise
     except Exception as e:
         LOG.error(f"Error downloading {e}")
     finally:
-        exit_prog(serial, xor) 
+        exit_prog(serial, xor)
     return memmap.MemoryMapBytes(data)
+
 
 def do_upload(radio):
     try:
@@ -337,16 +357,19 @@ def do_upload(radio):
             resp = write_block(serial, xor, addr, enc_data, BLK_SZ)
             status.cur += resp
             radio.status_fn(status)
+    except errors.RadioError:
+        raise
     except Exception as e:
         LOG.error(f"Error uploading {e}")
     finally:
         exit_prog(serial, xor)
 
+
 @directory.register
 class BF5RHPro(chirp_common.CloneModeRadio):
     """Baofeng BF-5RH Pro GPS"""
     VENDOR = "Baofeng"
-    MODEL = "BF-5RHPro"
+    MODEL = "BF-5RH-Pro"
     BAUD_RATE = 19200
     POWER_LEVELS = [chirp_common.PowerLevel("Low",  watts=0.50),
                     chirp_common.PowerLevel("High", watts=3.00)]
@@ -358,14 +381,12 @@ class BF5RHPro(chirp_common.CloneModeRadio):
     VALID_DTMF = [str(i) for i in range(0, 10)] + \
         ["A", "B", "C", "D", "*", "#"] + [' ']
     ASCII_NUM = [str(i) for i in range(10)] + [' ']
-    VALID_STEPS = [2.5, 5.0, 6.25, 10, 12.5, 20, 25, 50]
 
     def get_features(self):
         rf = chirp_common.RadioFeatures()
         rf.has_settings = True
         rf.has_bank = False
-        rf.has_tuning_step = True
-        rf.valid_tuning_steps = self.VALID_STEPS
+        rf.has_tuning_step = False
         rf.has_name = True
         rf.valid_characters = self.VALID_CHARSET
         rf.valid_name_length = 6
@@ -394,8 +415,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rf.valid_skips = ["", "S"]
         rf.valid_bands = self.VALID_BANDS
         rf.memory_bounds = (1, 640)
-        return rf    
-
+        return rf
 
     def process_mmap(self):
         self._memobj = bitwise.parse(MEM_FORMAT, self._mmap)
@@ -415,32 +435,36 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             do_upload(self)
         except Exception as e:
             raise errors.RadioError(f"Error during upload {e}")
-        
+
     def get_memory(self, number):
         mem = chirp_common.Memory()
         mem.number = number
         _mem = self._memobj.memory[number-1]
         mem.freq = int(_mem.rx_freq) * 10
-        if mem.freq == 0:
+        if self.get_empty(number - 1):
             mem.empty = True
             return mem
-        _name = "".join(str(c) if str(c) in self.VALID_CHARSET else ' ' for c in _mem.name )
+        _name = "".join(str(c) if str(
+            c) in self.VALID_CHARSET else ' ' for c in _mem.name)
         mem.name = _name.rstrip()
         mem.power = self.POWER_LEVELS[_mem.power]
         mem.mode = self.VALID_MODES[_mem.bandwidth]
+        mem.skip = 'S' if self.get_skip(number - 1) else ""
 
-        if int(_mem.tx_freq) == 0:
+        if int(_mem.tx_freq) == int(_mem.rx_freq):
             mem.duplex = ''
+            mem.offset = 0
+        elif int(_mem.tx_freq) == 0:
+            mem.duplex = 'off'
             mem.offset = 0
         elif int(_mem.tx_freq) > int(_mem.rx_freq):
             mem.duplex = '+'
             mem.offset = (int(_mem.tx_freq) - int(_mem.rx_freq)) * 10
         elif int(_mem.rx_freq) > int(_mem.tx_freq):
             mem.duplex = '-'
-            mem.offset = (int(_mem.tx_freq) - int(_mem.rx_freq)) * 10
+            mem.offset = ((int(_mem.rx_freq) - int(_mem.tx_freq)) * 10)
 
         self.get_tones(_mem, mem)
-
 
         mem.extra = RadioSettingGroup("Extra", "extra")
 
@@ -490,7 +514,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
                                        current_index=int(_mem.twotone))
         rs = RadioSetting("twotone", "2-Tone Index", rstype)
         mem.extra.append(rs)
-        
+
         _options = [str(i) for i in range(5+1)]
         rstype = RadioSettingValueList(options=_options,
                                        current_index=int(_mem.mdc))
@@ -504,91 +528,112 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         mem.extra.append(rs)
 
         return mem
-    
-    
+
     def set_memory(self, mem):
+
         _mem = self._memobj.memory[mem.number - 1]
-        
+
         if mem.empty:
+            self.set_empty(mem.number - 1, 1)
             _mem.fill_raw(b'\x00')
             return
-        
+
         _mem.rx_freq = mem.freq // 10
+
+        if self.get_empty(mem.number - 1):
+            #new memory
+            self.set_empty(mem.number - 1, 0)
+            mem.duplex == ''
+            _mem.tx_freq.set_value(int(_mem.rx_freq))
+            _mem.power = 1
+        
         _name = [c for c in mem.name]
         if len(_name) < 16:
             _name = _name + [' '] * (16 - len(_name))
         _mem.name = _name
         
-        self.set_tone(_mem, mem)
+        _skip = 1 if mem.skip == 'S' else 0
+        self.set_skip(mem.number - 1, _skip)
 
+        _mem.bandwidth = self.VALID_MODES.index(mem.mode)
+        self.set_tone(_mem, mem)
+        
         if mem.duplex == '+':
             _mem.tx_freq = (mem.freq + mem.offset) // 10
         elif mem.duplex == '-':
             _mem.tx_freq = (mem.freq - mem.offset) // 10
         elif mem.duplex == '':
-            _mem.tx_freq == 0x0000
+            _mem.tx_freq.set_value(int(_mem.rx_freq))
+        elif mem.duplex == 'off':
+            _mem.tx_freq.set_value(0)
 
         for setting in mem.extra:
             setattr(_mem, setting.get_name(), setting.value)
-    
+
     def get_tones(self, _mem, mem):
-        # populate ui from _mem
-        # parse decode/rtone/rx_dtcs
-        _rx_tone = int(_mem.rx_tone)
-        if _rx_tone == 0:
-            # off
+        _memrxtone = int(_mem.rx_tone)
+        msb = _mem.rx_tone.get_raw()[0]
+        if _memrxtone == 16665 or _memrxtone == 0:
             rxtone = ("", 0, None)
-        elif _rx_tone < 8000:
-            # ctcss tone
-            rxtone = ("Tone", _rx_tone / 10, None)
-        elif _rx_tone >= 8000 and _rx_tone < 12000:
+        elif 0x80 <= msb < 0xc0:
             # DCS Normal
-            rxtone = ("DTCS", (_rx_tone - 8000), "N")
-        elif _rx_tone >= 12000:
+            rxtone = ("DTCS", _memrxtone % 8000, "N")
+        elif msb >= 0xc0:
             # DCS Inverted
-            rxtone = ("DTCS", (_rx_tone - 12000), "R")
+            rxtone = ("DTCS", _memrxtone % 12000, "R")
         else:
-            rxtone = ("", 0, None)
-        # parse encode/dtcs/ctone
-        _tx_tone = int(_mem.tx_tone)
-        if _tx_tone == 0:
-            # off
+            # CTCSS
+            rxtone = ("Tone",  _memrxtone / 10, None)
+        _memtxtone = int(_mem.tx_tone)
+        msb = _mem.tx_tone.get_raw()[0]
+        if _memtxtone == 16665 or _memtxtone == 0:
             txtone = ("", 0, None)
-        elif _tx_tone < 8000:
-            # ctcss tone
-            txtone = ("Tone", _tx_tone / 10, None)
-        elif _tx_tone >= 8000 and _tx_tone < 12000:
+        elif 0x80 <= msb < 0xc0:
             # DCS Normal
-            txtone = ("DTCS", (_tx_tone - 8000), "N")
-        elif _tx_tone >= 12000:
+            txtone = ("DTCS",  _memtxtone % 8000, "N")
+        elif msb >= 0xc0:
             # DCS Inverted
-            txtone = ("DTCS", (_tx_tone - 12000), "R")
+            txtone = ("DTCS",  _memtxtone % 12000, "R")
         else:
-            txtone = ("", 0, None)
+            # CTCSS
+            txtone = ("Tone",  _memtxtone / 10, None)
         chirp_common.split_tone_decode(mem, txtone, rxtone)
-    
+
     def set_tone(self, _mem, mem):
-         # sets tones in _mem from ui edit
         ((txmode, txval, txpol),
          (rxmode, rxval, rxpol)) = chirp_common.split_tone_encode(mem)
         if txmode == "":
-            _mem.tx_tone = 0x0000
+            _mem.tx_tone.set_raw(b'\xff\xff')
         if rxmode == "":
-            _mem.rx_tone = 0x0000
+            _mem.rx_tone.set_raw(b'\xff\xff')
         if txmode == "Tone":
-            _mem.tx_tone = txval * 10
+            _mem.tx_tone = int(txval * 10)
         if rxmode == "Tone":
-            _mem.rx_tone = rxval * 10
+            _mem.rx_tone = int(rxval * 10)
         if txmode == "DTCS" and txpol == "N":
-            _mem.tx_tone = txval + 8000
+            _mem.tx_tone = int(txval + 8000)
         if rxmode == "DTCS" and rxpol == "N":
-            _mem.rx_tone = rxval + 8000
+            _mem.rx_tone = int(rxval + 8000)
         if txmode == "DTCS" and txpol == "R":
-            _mem.tx_tone = txval + 12000
+            msb = (txval // 100) + 0xc0
+            lsb = int("%02i" % (txval % 100), 16)
+            _mem.tx_tone.set_raw(bytes([msb, lsb]))
         if rxmode == "DTCS" and rxpol == "R":
-            _mem.rx_tone = rxval + 12000
+            msb = (rxval // 100) + 0xc0
+            lsb = int("%02i" % (rxval % 100), 16)
+            _mem.rx_tone.set_raw(bytes([msb, lsb]))
 
+    def get_skip(self, chan_n):
+        return self._memobj.scan_skip['bitfield'][chan_n].get_value()
 
+    def set_skip(self, chan_n, value):
+        self._memobj.scan_skip['bitfield'][chan_n].set_value(value)
+
+    def get_empty(self, chan_n):
+        return self._memobj.chan_empty['bitfield'][chan_n].get_value()
+    
+    def set_empty(self, chan_n, value):
+        self._memobj.chan_empty['bitfield'][chan_n].set_value(value)
 
     def get_settings(self):
         _dev_info = self._memobj.dev_info
@@ -604,11 +649,11 @@ class BF5RHPro(chirp_common.CloneModeRadio):
 
         def _idx_or_default(setting, _list, default):
             try:
-                val = _list[setting]
+                _list[setting]
                 return setting
             except IndexError:
                 return default
-        
+
         info = RadioSettingGroup("info", "Device Info")
         group = RadioSettings(info)
 
@@ -652,12 +697,13 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("settings.vox", "VOX", rs)
         settings.append(rset)
 
-        a = ['n/a'] + [ str(i/10) for i in range(10, 101, 5)]
-        b = [0] + list(range(10,100+1,5))
-        _opmap = list(zip(a,b))
+        a = ['n/a'] + [str(i/10) for i in range(10, 101, 5)]
+        b = [0] + list(range(10, 100+1, 5))
+        _opmap = list(zip(a, b))
         rs = RadioSettingValueMap(_opmap, _settings.vox_dly_detect)
-        rset = RadioSetting("settings.vox_dly_detect", "VOX Delay Detect(s)", rs)
-        settings.append(rset)  
+        rset = RadioSetting("settings.vox_dly_detect",
+                            "VOX Delay Detect(s)", rs)
+        settings.append(rset)
 
         rs = RadioSettingValueInteger(minval=0, maxval=9,
                                       current=_settings.vox_lvl, step=1)
@@ -691,7 +737,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("settings.gps", "GPS", rs)
         settings.append(rset)
 
-        _options = [str(i) for i in range(-12,13,1)]
+        _options = [str(i) for i in range(-12, 13, 1)]
         rs = RadioSettingValueList(
             _options, current_index=_settings.gps_zone)
         rset = RadioSetting("settings.gps_zone",
@@ -715,7 +761,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             _options, current_index=_settings.band_a_chandisp)
         rset = RadioSetting("settings.band_a_chandisp",
                             "Band A Chan. Display", rs)
-        settings.append(rset) 
+        settings.append(rset)
 
         _options = ['Freq', 'Name', 'Number', 'Freq. + Name']
         rs = RadioSettingValueList(
@@ -729,7 +775,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             _options, current_index=_settings.main_band)
         rset = RadioSetting("settings.main_band",
                             "Main Band", rs)
-        settings.append(rset)         
+        settings.append(rset)
 
         _options = ['VFO', 'MR']
         rs = RadioSettingValueList(
@@ -759,9 +805,9 @@ class BF5RHPro(chirp_common.CloneModeRadio):
                             "Band B Zone", rs)
         settings.append(rset)
 
-        a = ['always'] + [str(i) for i in range(5,31)]
-        b = [0] + [i for i in range(5,31)]
-        _opmap = list(zip(a,b))
+        a = ['always'] + [str(i) for i in range(5, 31)]
+        b = [0] + [i for i in range(5, 31)]
+        _opmap = list(zip(a, b))
         rs = RadioSettingValueMap(_opmap, _settings.backlight_tm)
         rset = RadioSetting("settings.backlight_tm", "Backlight Time(s)", rs)
         settings.append(rset)
@@ -779,7 +825,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("settings.power_save_time",
                             "Power Save Time", rs)
         settings.append(rset)
-        
+
         _options = ['Off', 'Dual', 'Single']
         rs = RadioSettingValueList(
             _options, current_index=_settings.dbl_waiting)
@@ -792,29 +838,30 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             _options, current_index=_settings.apo)
         rset = RadioSetting("settings.apo",
                             "APO (min)", rs)
-        settings.append(rset)        
+        settings.append(rset)
 
-        _options = [ str(i) for i in range (0, 211,15)]
+        _options = [str(i) for i in range(0, 211, 15)]
         rs = RadioSettingValueList(
             _options, current_index=_settings.tot)
         rset = RadioSetting("settings.tot",
                             "TOT (s)", rs)
         settings.append(rset)
 
-        _options = [ str(i) for i in range (0, 10+1)]
+        _options = [str(i) for i in range(0, 10+1)]
         rs = RadioSettingValueList(
             _options, current_index=_settings.tot_alert)
         rset = RadioSetting("settings.tot_alert",
                             "TOT Alert (s)", rs)
         settings.append(rset)
 
-        _opmap = [("Off", 0), ("55Hz", 1), ("120deg", 2), ("180deg", 3), ("240deg", 4)]
+        _opmap = [("Off", 0), ("55Hz", 1), ("120deg", 2),
+                  ("180deg", 3), ("240deg", 4)]
         rs = RadioSettingValueMap(_opmap, _settings.tail_mode)
         rset = RadioSetting("settings.tail_mode", "Tail Mode", rs)
-        settings.append(rset) 
+        settings.append(rset)
 
         exsettings = RadioSettingSubGroup("exsettings",
-                                            "Extra Settings")
+                                          "Extra Settings")
         settings.append(exsettings)
 
         _options = ['1000Hz', '1450Hz', '1750Hz', '2100Hz']
@@ -833,7 +880,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             current=_settings.falling_alarm, mem_vals=(0, 1))
         rset = RadioSetting("settings.falling_alarm", "Falling Alarm", rs)
         exsettings.append(rset)
-        
+
         rs = RadioSettingValueBoolean(
             current=_settings.alone_worker, mem_vals=(0, 1))
         rset = RadioSetting("settings.alone_worker", "Alone Worker", rs)
@@ -842,10 +889,11 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rs = RadioSettingValueBoolean(
             current=_settings.enhance_func, mem_vals=(0, 1))
         rset = RadioSetting("settings.enhance_func", "Enhance Function", rs)
-        exsettings.append(rset)        
+        exsettings.append(rset)
 
         _options = ['STAN', 'Fail']
-        rs = RadioSettingValueList(_options, current_index=_settings.disp_reverse)
+        rs = RadioSettingValueList(
+            _options, current_index=_settings.disp_reverse)
         rset = RadioSetting("settings.disp_reverse",
                             "Display Reverse", rs)
         exsettings.append(rset)
@@ -855,15 +903,19 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("settings.language",
                             "Language", rs)
         exsettings.append(rset)
-    
+
+        _current = _settings.lone_wrk_remind
         rs = RadioSettingValueInteger(minval=0, maxval=255,
-                                      current=_settings.lone_wrk_remind, step=1)
-        rset = RadioSetting("settings.lone_wrk_remind", "Lone Worker Remind (s)", rs)
+                                      current=_current, step=1)
+        rset = RadioSetting("settings.lone_wrk_remind",
+                            "Lone Worker Remind (s)", rs)
         exsettings.append(rset)
-        
+
+        _current = _settings.lone_wrk_resp
         rs = RadioSettingValueInteger(minval=0, maxval=255,
-                                      current=_settings.lone_wrk_resp, step=1)
-        rset = RadioSetting("settings.lone_wrk_resp", "Lone Worker Response (min)", rs)
+                                      current=_current, step=1)
+        rset = RadioSetting("settings.lone_wrk_resp",
+                            "Lone Worker Response (min)", rs)
         exsettings.append(rset)
 
         # SCAN SETTINGS
@@ -874,77 +926,83 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             new_value = int(setting.values()[0]) * 10
             mem_setting.set_value(new_value)
 
+        _current = int(_scan_freq.upper_freq)
         rs = RadioSettingValueInteger(minval=1360, maxval=4700,
-                                      current=(int(_scan_freq.lower_freq)), step=1)
+                                      current=_current)
         rset = RadioSetting("scan_freq.lower_freq", "Scan Lower (KHz)", rs)
-        rset.set_apply_callback(apply_freq,_scan_freq.lower_freq)
+        rset.set_apply_callback(apply_freq, _scan_freq.lower_freq)
         scanmenu.append(rset)
-
+        _current = int(_scan_freq.upper_freq)
         rs = RadioSettingValueInteger(minval=1360, maxval=4700,
-                                      current=(int(_scan_freq.upper_freq)), step=1)
+                                      current=_current)
         rset = RadioSetting("scan_freq.upper_freq", "Scan Upper (KHz)", rs)
-        rset.set_apply_callback(apply_freq,_scan_freq.upper_freq)
+        rset.set_apply_callback(apply_freq, _scan_freq.upper_freq)
         scanmenu.append(rset)
 
         _options = ['TO', 'CO', 'SO']
-        rs = RadioSettingValueList(_options, current_index=_scan_menu.scan_mode)
+        rs = RadioSettingValueList(
+            _options, current_index=_scan_menu.scan_mode)
         rset = RadioSetting("scan_menu.scan_mode", "Scan Mode", rs)
         scanmenu.append(rset)
 
-        # FLYBACK NEEDS 
         a = [str(i/10) for i in range(5, 50+1, 1)]
-        b = list(range(5,50+1))
-        _opmap = list(zip(a,b))
+        b = list(range(5, 50+1))
+        _opmap = list(zip(a, b))
         rs = RadioSettingValueMap(_opmap, _scan_menu.flyback)
         rset = RadioSetting("scan_menu.flyback", "Flyback Time", rs)
         scanmenu.append(rset)
 
-        a = [str(i/10) for i in range(1,50+1,1)]
-        b = list(range(1,50+1))
-        _opmap = list(zip(a,b))
+        a = [str(i/10) for i in range(1, 50+1, 1)]
+        b = list(range(1, 50+1))
+        _opmap = list(zip(a, b))
         rs = RadioSettingValueMap(_opmap, _scan_menu.rx_recovery)
-        rset = RadioSetting("scan_menu.rx_recovery", "RX Recovery Delay (s)", rs)
+        rset = RadioSetting("scan_menu.rx_recovery",
+                            "RX Recovery Delay (s)", rs)
         scanmenu.append(rset)
 
         rs = RadioSettingValueMap(_opmap, _scan_menu.tx_recovery)
-        rset = RadioSetting("scan_menu.tx_recovery", "TX Recovery Delay (s)", rs)
+        rset = RadioSetting("scan_menu.tx_recovery",
+                            "TX Recovery Delay (s)", rs)
         scanmenu.append(rset)
 
         _options = ['selected', 'selected + current', 'last call received',
                     'last use ', 'priority', 'priority + current']
-        rs = RadioSettingValueList(_options, current_index=_scan_menu.channel_rtn)
+        rs = RadioSettingValueList(
+            _options, current_index=_scan_menu.channel_rtn)
         rset = RadioSetting("scan_menu.channel_rtn", "Channel Return", rs)
         scanmenu.append(rset)
-        
+
         rs = RadioSettingValueBoolean(
             current=_scan_menu.priority, mem_vals=(0, 1))
         rset = RadioSetting("scan_menu.priority", "Priority", rs)
         scanmenu.append(rset)
 
-        a = [str(i) for i in range(1,64+1)]
+        a = [str(i) for i in range(1, 64+1)]
         b = list(range(64))
-        _opmap = list(zip(a,b))
-        _current = _idx_or_default(_scan_menu.prio_scan_chan, b, 0) 
+        _opmap = list(zip(a, b))
+        _current = _idx_or_default(_scan_menu.prio_scan_chan, b, 0)
         rs = RadioSettingValueMap(_opmap, _current)
-        rset = RadioSetting("scan_menu.prio_scan_chan", "Priority Scan Channel", rs)
+        rset = RadioSetting("scan_menu.prio_scan_chan",
+                            "Priority Scan Channel", rs)
         scanmenu.append(rset)
 
         _options = ['All', 'Memory Scan']
         rs = RadioSettingValueList(_options,
                                    current_index=_scan_menu.scan_range)
         rset = RadioSetting("scan_menu.scan_range", "Scan Range", rs)
-        scanmenu.append(rset)         
+        scanmenu.append(rset)
 
         # PROG KEY SETTINGS
         progkey = RadioSettingGroup("progkey", "Program Key")
         group.append(progkey)
 
-        _opmap = [("None", 0), ("Scan On/Off", 1), ("Monitor", 2), ("FM Radio", 4),
-                    ("Emergency", 5), ("GPS", 6), ("Freq. Measuring", 7),
-                    ("1750Hz", 9), ("Falling Alarm", 10), ("One Touch Call", 11) ,
-                    ("Zone Change", 12) , ("Battery Indicator", 13) , ("Tx Power", 14),
-                    ("VOX On/Off", 15)]
-        
+        _opmap = [("None", 0), ("Scan On/Off", 1), ("Monitor", 2),
+                  ("FM Radio", 4), ("Emergency", 5), ("GPS", 6),
+                  ("Freq. Measuring", 7), ("1750Hz", 9),
+                  ("Falling Alarm", 10), ("One Touch Call", 11),
+                  ("Zone Change", 12), ("Battery Indicator", 13),
+                  ("Tx Power", 14), ("VOX On/Off", 15)]
+
         rs = RadioSettingValueMap(
             _opmap, _prog_key.pf1_short)
         rset = RadioSetting("prog_key.pf1_short", "PF1 Short", rs)
@@ -971,15 +1029,15 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rs = RadioSettingValueBoolean(
             current=_dtmf.dtmf_ani, mem_vals=(0, 1))
         rset = RadioSetting("dtmf.dtmf_ani", "DTMF ANI", rs)
-        dtmf.append(rset)  
+        dtmf.append(rset)
 
         _options = ['50', '100', '200', '300', '500']
         rs = RadioSettingValueList(
             _options, current_index=_dtmf.sending_rate)
         rset = RadioSetting("dtmf.sending_rate", "Sending Rate (ms)", rs)
         dtmf.append(rset)
-        
-        _options = [str(i) for i in range(0,2501,10)]
+
+        _options = [str(i) for i in range(0, 2501, 10)]
         rs = RadioSettingValueList(
             _options, current_index=_dtmf.first_tm_code)
         rset = RadioSetting("dtmf.first_tm_code", "First Time Code (ms)", rs)
@@ -990,15 +1048,15 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("dtmf.precarrier_tm", "Precarrier Time (ms)", rs)
         dtmf.append(rset)
 
-        a = [str(i) for i in range(10,2501,10)]
-        b = list(range(1,250+1))
-        _opmap = list(zip(a,b))
+        a = [str(i) for i in range(10, 2501, 10)]
+        b = list(range(1, 250+1))
+        _opmap = list(zip(a, b))
         rs = RadioSettingValueMap(
             _opmap, _dtmf.delay_tm)
         rset = RadioSetting("dtmf.delay_tm", "Delay Time(ms)", rs)
         dtmf.append(rset)
 
-        _options = [ str(i) for i in range(0,76,5)]     
+        _options = [str(i) for i in range(0, 76, 5)]
         rs = RadioSettingValueList(
             _options, current_index=_dtmf.ptt_pause_tm)
         rset = RadioSetting("dtmf.ptt_pause_tm", "PTT Pause Time (s)", rs)
@@ -1006,23 +1064,24 @@ class BF5RHPro(chirp_common.CloneModeRadio):
 
         rs = RadioSettingValueBoolean(current=_dtmf.dtmf_st, mem_vals=(0, 1))
         rset = RadioSetting("dtmf.dtmf_st", "DTMF-ST", rs)
-        dtmf.append(rset) 
+        dtmf.append(rset)
 
         rs = RadioSettingValueInteger(minval=10, maxval=25,
                                       current=_dtmf.auto_reset_tm, step=1)
         rset = RadioSetting("dtmf.auto_reset_tm", "Auto Reset Time (s)", rs)
         dtmf.append(rset)
 
-        _opmap = [("A", 0xa), ("B", 0xb), ("C", 0xc), ("D", 0xd), ("*", 0xe), ("#", 0xf)]
+        _opmap = [("A", 0xa), ("B", 0xb), ("C", 0xc),
+                  ("D", 0xd), ("*", 0xe), ("#", 0xf)]
         rs = RadioSettingValueMap(_opmap, _dtmf.sepr_opts)
         rset = RadioSetting("dtmf.sepr_opts", "Separator Option", rs)
-        dtmf.append(rset) 
+        dtmf.append(rset)
 
         rs = RadioSettingValueMap(_opmap, _dtmf.group_num)
         rset = RadioSetting("dtmf.group_num", "Group Option", rs)
         dtmf.append(rset)
 
-        _options = ['None', 'Tone', 'Tone Reply']     
+        _options = ['None', 'Tone', 'Tone Reply']
         rs = RadioSettingValueList(
             _options, current_index=_dtmf.decode_resp)
         rset = RadioSetting("dtmf.decode_resp", "Decode Response", rs)
@@ -1054,28 +1113,28 @@ class BF5RHPro(chirp_common.CloneModeRadio):
                                      current=_current,
                                      charset=self.VALID_DTMF)
         rset = RadioSetting("dtmf.ptt_id", "PTT ID Online", rs)
-        dtmf.append(rset)         
+        dtmf.append(rset)
 
         _current = dtmf_xlate(_dtmf.ptt_id_offline)
         rs = RadioSettingValueString(minlength=0, maxlength=16,
                                      current=_current,
                                      charset=self.VALID_DTMF)
         rset = RadioSetting("dtmf.ptt_id_offline", "PTT ID Offine", rs)
-        dtmf.append(rset) 
+        dtmf.append(rset)
 
         _current = dtmf_xlate(_dtmf.stun)
         rs = RadioSettingValueString(minlength=0, maxlength=11,
                                      current=_current,
                                      charset=self.VALID_DTMF)
         rset = RadioSetting("dtmf.stun", "STUN", rs)
-        dtmf.append(rset) 
+        dtmf.append(rset)
 
         _current = dtmf_xlate(_dtmf.kill)
         rs = RadioSettingValueString(minlength=0, maxlength=11,
                                      current=_current,
                                      charset=self.VALID_DTMF)
         rset = RadioSetting("dtmf.kill", "KILL", rs)
-        dtmf.append(rset) 
+        dtmf.append(rset)
 
         # DTMF Encode List
         dtmf_mem = RadioSettingGroup("dtmf_mem", "DTMF Encode List")
@@ -1083,29 +1142,32 @@ class BF5RHPro(chirp_common.CloneModeRadio):
 
         for i in range(0, 16):  # 1-16
             rs = RadioSettingValueString(minlength=0, maxlength=16,
-                                         current=dtmf_xlate(_dtmf_list[i].entry),
+                                         current=dtmf_xlate(
+                                             _dtmf_list[i].entry),
                                          charset=self.VALID_DTMF)
             rset = RadioSetting(f"dtmf_list[{i}].entry", f"Entry{i+1}", rs)
             dtmf_mem.append(rset)
-            
+
         # APRS MENU
         aprs = RadioSettingGroup("aprs", "APRS Settings")
         group.append(aprs)
 
-        _current = "".join(str(c) for c in _aprs_menu.selfid if str(c) in chirp_common.CHARSET_ALPHANUMERIC)
+        _current = "".join(str(c) for c in _aprs_menu.selfid if str(
+            c) in chirp_common.CHARSET_ALPHANUMERIC)
         rs = RadioSettingValueString(minlength=0, maxlength=6,
-                                         current=_current,
-                                         charset=chirp_common.CHARSET_ALPHANUMERIC)
+                                     current=_current,
+                                     charset=chirp_common.CHARSET_ALPHANUMERIC)
         rset = RadioSetting("aprs_menu.selfid", "Self ID", rs)
         aprs.append(rset)
 
-        _current = "".join(str(c) for c in _aprs_menu.targetid if str(c) in chirp_common.CHARSET_ALPHANUMERIC)
+        _current = "".join(str(c) for c in _aprs_menu.targetid if str(
+            c) in chirp_common.CHARSET_ALPHANUMERIC)
         rs = RadioSettingValueString(minlength=0, maxlength=6,
-                                         current=_current,
-                                         charset=chirp_common.CHARSET_ALPHANUMERIC)
+                                     current=_current,
+                                     charset=chirp_common.CHARSET_ALPHANUMERIC)
         rset = RadioSetting("aprs_menu.targetid", "Target ID", rs)
         aprs.append(rset)
-             
+
         _options = [str(i*-1) for i in range(16)]
         _idx = _idx_or_default(_aprs_menu.self_ssid, _current, 0)
         rs = RadioSettingValueList(
@@ -1119,15 +1181,17 @@ class BF5RHPro(chirp_common.CloneModeRadio):
         rset = RadioSetting("aprs_menu.target_ssid", "Target SSID", rs)
         aprs.append(rset)
 
-        _options = [str(i) for i in range(0,2551,10)]
+        _options = [str(i) for i in range(0, 2551, 10)]
         rs = RadioSettingValueList(
             _options, current_index=_aprs_menu.precarrier_tm)
-        rset = RadioSetting("aprs_menu.precarrier_tm", "Precarrier Time (ms)", rs)
+        rset = RadioSetting("aprs_menu.precarrier_tm",
+                            "Precarrier Time (ms)", rs)
         aprs.append(rset)
 
         rs = RadioSettingValueList(
             _options, current_index=_aprs_menu.code_dly_tm)
-        rset = RadioSetting("aprs_menu.code_dly_tm", "Code Delay Time (ms)", rs)
+        rset = RadioSetting("aprs_menu.code_dly_tm",
+                            "Code Delay Time (ms)", rs)
         aprs.append(rset)
 
         # APRS SSID List
@@ -1139,11 +1203,12 @@ class BF5RHPro(chirp_common.CloneModeRadio):
                                        current_index=_ssid_tbl[i].ssid)
             rset = RadioSetting(f"ssid_tbl[{i}].ssid", f"{i+1}: SSID", rs)
             ssid.append(rset)
-
-            _current = "".join(str(c) for c in _ssid_tbl[i].entry if str(c) in chirp_common.CHARSET_ALPHANUMERIC )
+            _charset = chirp_common.CHARSET_ALPHANUMERIC
+            _current = "".join(str(c) for c in _ssid_tbl[i].entry if str(
+                c) in chirp_common.CHARSET_ALPHANUMERIC)
             rs = RadioSettingValueString(minlength=0, maxlength=6,
                                          current=_current,
-                                         charset=chirp_common.CHARSET_ALPHANUMERIC)
+                                         charset=_charset)
             rset = RadioSetting(f"ssid_tbl[{i}].entry", "Call Sign", rs)
             ssid.append(rset)
 
@@ -1153,19 +1218,20 @@ class BF5RHPro(chirp_common.CloneModeRadio):
 
         for i in range(0, 80):  # 1-80
             rs = RadioSettingValueInteger(minval=0, maxval=255,
-                                       current=_contacts[i].code)
+                                          current=_contacts[i].code)
             rset = RadioSetting(f"contacts[{i}].code", f"{i+1}:", rs)
             contacts.append(rset)
-
-            _current = "".join(str(c) for c in _contacts[i].name if str(c) in self.VALID_CHARSET )
+            _charset = self.VALID_CHARSET
+            _current = "".join(
+                str(c) for c in _contacts[i].name if str(c) in _charset)
             rs = RadioSettingValueString(minlength=0, maxlength=14,
                                          current=_current,
-                                         charset=self.VALID_CHARSET)
+                                         charset=_charset)
             rset = RadioSetting(f"contacts[{i}].name", "Name", rs)
             contacts.append(rset)
 
         return group
-    
+
     def _dtmf_set__mem(self, obj, setting, element):
         _dtmf_map = [str(i) for i in range(10)]
         _dtmf_map += ['A', 'B', 'C', 'D', '*', '#']
@@ -1189,7 +1255,7 @@ class BF5RHPro(chirp_common.CloneModeRadio):
             else:
                 _os += 1
         setattr(obj, setting, _val)
-    
+
     def set_settings(self, settings):
         for element in settings:
             if not isinstance(element, RadioSetting):
@@ -1218,9 +1284,9 @@ class BF5RHPro(chirp_common.CloneModeRadio):
 
                     if element.value.get_mutable():
                         if setting in ['ptt_id', 'ptt_id_offline',
-                                         'stun', 'kill']:
+                                       'stun', 'kill']:
                             self._dtmf_set__mem(obj, setting, element)
-                        elif obj._name in ['ssid_tbl','dtmf_list']:
+                        elif obj._name in ['ssid_tbl', 'dtmf_list']:
                             if obj._name == 'ssid_tbl':
                                 if setting == 'entry':
                                     self._ssid_set__mem(obj, setting, element)
@@ -1234,8 +1300,9 @@ class BF5RHPro(chirp_common.CloneModeRadio):
                         else:
                             setattr(obj, setting, element.value)
                 except Exception:
-                    #LOG.debug(element.get_name())
+                    LOG.debug(element.get_name())
                     raise
+
     @classmethod
     def match_model(cls, filedata, filename):
         # new drivers identified by metadata
